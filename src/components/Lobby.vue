@@ -2,7 +2,7 @@
 
 export default {
     emits: ['joinedRoom'],
-    
+
     data() {
         return {
             playerID: "",
@@ -13,7 +13,10 @@ export default {
     methods: {
         createRoom() {
             fetch(`https://playset-celibacy-myspace.ngrok-free.dev/api/rooms/create?maxPlayers=4&playerID=${this.playerID}`, {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
             })
                 .then(response => response.json())
                 .then(data => {
@@ -24,11 +27,18 @@ export default {
 
         joinRoom() {
             fetch(`https://playset-celibacy-myspace.ngrok-free.dev/api/rooms/${this.code}/join?playerID=${this.playerID}`, {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
             })
                 .then(response => {
                     if (response.ok) {
-                        return fetch(`https://playset-celibacy-myspace.ngrok-free.dev/api/rooms/${this.code}`)
+                        return fetch(`https://playset-celibacy-myspace.ngrok-free.dev/api/rooms/${this.code}`, {
+                            headers: {
+                                'ngrok-skip-browser-warning': 'true'
+                            }
+                        })
                     }
                 })
                 .then(response => response.json())
