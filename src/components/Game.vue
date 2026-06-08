@@ -146,7 +146,8 @@ export default {
 
     const loader = new THREE.CubeTextureLoader();
     const texture = loader.load([px, nx, py, ny, pz, nz]);
-
+    scene.background = texture;
+    
     const animate = () => {
       if (players[this.playerID]) {
         const headPos = new THREE.Vector3()
